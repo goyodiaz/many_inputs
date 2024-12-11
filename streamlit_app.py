@@ -80,4 +80,4 @@ if tab == "Lift Prediction Calculator":
             st.write("Predicted Bench:", round(predicted_value, 2), "kg")
         elif input_lift == "Deadlift":
             predicted_value = models['Best3DeadliftKg'].predict([[squat, bench, bodyweight, sex_encoded]])[0]
-            st.write("Predicted Deadlift:", round(predicted_value, 2), "kg")`Preformatted text`
+            st.write("Predicted Deadlift:", round(predicted_value, 2), "kg")
