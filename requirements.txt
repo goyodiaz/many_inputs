@@ -1,2 +1,5 @@
+lightgbm
 numpy
+pandas
+scikit-learn
 streamlit
