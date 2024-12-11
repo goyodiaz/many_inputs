@@ -15,7 +15,7 @@ def get_data():
 
 
 df_new_powerlift = get_data()
-tab = "Lift Prediction Calculator":
+tab = "Lift Prediction Calculator"
 if tab == "Lift Prediction Calculator":
     st.subheader("Predict Your Missing Lift")
     st.write("""
