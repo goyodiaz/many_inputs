@@ -33,16 +33,14 @@ for target in ['Best3SquatKg', 'Best3BenchKg', 'Best3DeadliftKg']:
 # Form for user input
 with st.form(key="lift_prediction_form"):
     input_lift = "Squat"
-    bodyweight = st.number_input("Enter your body weight (kg):", min_value=20.0, max_value=200.0, step=0.1)
-    sex = st.selectbox("Select your sex:", ["Male", "Female"])
-    sex_encoded = 0 if sex == "Male" else 1
+    bodyweight = 20
+    sex_encoded = 0
     bench = st.number_input("Enter your Bench (kg):", min_value=20.0, max_value=600.0, step=0.1, key="bench_input")
     deadlift = st.number_input("Enter your Deadlift (kg):", min_value=20.0, max_value=600.0, step=0.1, key="deadlift_input")
 
     # Submit button
     submit = st.form_submit_button(label="Predict")
 
-# Perform prediction only after the form is submitted
 if submit:
     predicted_value = models['Best3SquatKg'].predict([[bench, deadlift, bodyweight, sex_encoded]])[0]
     st.write("Predicted Squat:", round(predicted_value, 2), "kg")
