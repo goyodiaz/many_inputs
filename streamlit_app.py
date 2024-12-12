@@ -24,11 +24,12 @@ def data_split(target):
 
 # Create models for the lift based on the model
 models = {}
-for target in ['Best3SquatKg', 'Best3BenchKg', 'Best3DeadliftKg']:
-    X, y = data_split(target)
-    model = RandomForestRegressor(n_estimators=100)
-    model.fit(X, y)
-    models[target] = model
+# for target in ['Best3SquatKg', 'Best3BenchKg', 'Best3DeadliftKg']:
+target = 'Best3SquatKg'
+X, y = data_split(target)
+model = RandomForestRegressor(n_estimators=100)
+model.fit(X, y)
+models[target] = model
 
 # Form for user input
 with st.form(key="lift_prediction_form"):
