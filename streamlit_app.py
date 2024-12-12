@@ -7,15 +7,16 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.neighbors import KNeighborsRegressor
 
 
-@st.cache_resource
-def get_data():
+@st.cache_resource(max_entries=1)
+def get_data(lenght):
     names = ['Best3SquatKg', 'Best3BenchKg', 'Best3DeadliftKg', 'BodyweightKg', 'Sex_Encoded']
     rng = np.random.default_rng(seed=0)
-    data = rng.random(size=(100, len(names)))
+    data = rng.random(size=(lenght, len(names)))
     return pd.DataFrame(data, columns=names)
 
 
-df_new_powerlift = get_data()
+lenght = st.number_input("Data lenght", value=1000)
+df_new_powerlift = get_data(lenght=lenght)
 tab = "Lift Prediction Calculator"
 if tab == "Lift Prediction Calculator":
     st.subheader("Predict Your Missing Lift")
