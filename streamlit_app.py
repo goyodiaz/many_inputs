@@ -1,10 +1,7 @@
-from lightgbm import LGBMRegressor
 import numpy as np
 import pandas as pd
 import streamlit as st
-from sklearn.neural_network import MLPRegressor
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.neighbors import KNeighborsRegressor
 
 
 @st.cache_resource(max_entries=1)
@@ -15,7 +12,7 @@ def get_data(lenght):
     return pd.DataFrame(data, columns=names)
 
 
-lenght = st.number_input("Data lenght", value=1000)
+lenght = st.number_input("Data lenght", value=10000)
 df_new_powerlift = get_data(lenght=lenght)
 tab = "Lift Prediction Calculator"
 if tab == "Lift Prediction Calculator":
@@ -33,22 +30,11 @@ if tab == "Lift Prediction Calculator":
         y = df_data[target]
         return X, y
 
-    # Dropdown to select the model type
-    model_type = st.selectbox("Select the model type:", ["LightGBM", "MLP", "Random Forest", "KNN"])
-
     # Create models for the lift based on the model
     models = {}
     for target in ['Best3SquatKg', 'Best3BenchKg', 'Best3DeadliftKg']:
         X, y = data_split(target)
-        if model_type == "LightGBM":
-            model = LGBMRegressor(n_estimators=100, learning_rate=0.1)
-        elif model_type == "MLP":
-            model = MLPRegressor(hidden_layer_sizes=(100,), max_iter=500)
-        elif model_type == "Random Forest":
-            model = RandomForestRegressor(n_estimators=100)
-        elif model_type == "KNN":
-            model = KNeighborsRegressor(n_neighbors=5)
-
+        model = RandomForestRegressor(n_estimators=100)
         model.fit(X, y)
         models[target] = model
 
